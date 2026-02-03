@@ -1,2 +1,22 @@
 # ssspicek-ship-it.github.io
 My first website
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My First Website</title>
+</head>
+<body>
+<h1>Welcome to My Website!</h1>
+<p>Hello! My name is Suat Pembeçiçek and this is my first website.</p>
+<h2>About Me</h2>
+<p>I am learning web development at the University of York.</p>
+<h2>My Interests</h2>
+<ul>
+<li>Web Development</li>
+<li>Computer Science</li>
+<li>Technology</li>
+</ul>
+</body>
+</html>
