@@ -3,488 +3,353 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Suat Pembeçiçek – CS Portfolio (Synthwave)</title>
+  <title>Suat Pembeçiçek – CS Portfolio</title>
 
   <style>
     :root{
-      --bg:#05010a;
-      --ink:#ffe9ff;
-      --muted:#caa6d6;
-      --neon:#ff2bd6;
-      --cyan:#00f5ff;
-      --purple:#7c3aed;
-      --card: rgba(255, 43, 214, 0.08);
-      --border: rgba(255, 43, 214, 0.35);
-      --shadow: 0 0 18px rgba(255,43,214,0.35), 0 0 40px rgba(0,245,255,0.12);
+      --bg:#000000;            /* true black */
+      --ink:#f5f5f5;
+      --muted:#bdbdbd;
+      --pink:#ff2bbf;          /* neon pink, but NO glow */
+      --pink2:#ff2bbf;
+      --line: 1px;
+      --radius: 14px;
+      --pad: 18px;
+      --max: 980px;
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
+    *{ box-sizing: border-box; margin:0; padding:0; }
+
+    html{ scroll-behavior: auto; } /* NO smooth scroll */
 
     body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(255,43,214,0.18), transparent 55%),
-                  radial-gradient(900px 500px at 80% 20%, rgba(0,245,255,0.12), transparent 55%),
-                  radial-gradient(1200px 700px at 50% 90%, rgba(124,58,237,0.12), transparent 60%),
-                  var(--bg);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: var(--bg);
       color: var(--ink);
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    /* Synthwave grid background */
-    .grid {
+    /* top progress bar */
+    .progress-wrap{
       position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.28;
-      background:
-        linear-gradient(to top, rgba(255,43,214,0.35), transparent 60%),
-        repeating-linear-gradient(0deg, rgba(255,43,214,0.22) 0 1px, transparent 1px 40px),
-        repeating-linear-gradient(90deg, rgba(0,245,255,0.14) 0 1px, transparent 1px 60px);
-      transform: perspective(900px) rotateX(62deg) translateY(220px);
-      transform-origin: center bottom;
-      filter: blur(0.2px);
+      top: 0; left: 0;
+      width: 100%;
+      height: 8px;
+      border-bottom: var(--line) solid var(--pink);
+      background: var(--bg);
+      z-index: 9999;
     }
-
-    /* Scanlines + CRT flicker */
-    .scanlines{
-      position: fixed;
-      inset: 0;
-      pointer-events:none;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.04) 0px,
-        rgba(255,255,255,0.04) 1px,
-        transparent 3px,
-        transparent 6px
-      );
-      opacity: 0.22;
-      mix-blend-mode: overlay;
-    }
-
-    @keyframes flicker {
-      0%, 100% { opacity: 0.95; }
-      50% { opacity: 0.88; }
-      70% { opacity: 0.92; }
-    }
-
-    .crt{
-      animation: flicker 5.5s infinite;
+    .progress-bar{
+      height: 100%;
+      width: 0%;
+      background: var(--pink);
     }
 
     .container{
-      max-width: 1050px;
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 2.2rem 1.2rem 4rem;
-      position: relative;
-      z-index: 2;
+      padding: 28px 16px 60px;
     }
 
+    /* simple retro line frame */
     header{
-      border: 1px solid rgba(255,43,214,0.22);
-      background: rgba(5,1,10,0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 18px;
-      padding: 1.4rem 1.4rem;
-      box-shadow: var(--shadow);
+      border: var(--line) solid var(--pink);
+      border-radius: var(--radius);
+      padding: var(--pad);
     }
 
-    .topbar{
+    .top{
       display:flex;
-      gap: 1.2rem;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
-    .logo{
-      display:flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
     h1{
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-size: 28px;
       letter-spacing: 0.5px;
-      text-shadow:
-        0 0 10px rgba(255,43,214,0.55),
-        0 0 20px rgba(255,43,214,0.28),
-        0 0 30px rgba(0,245,255,0.18);
+      font-weight: 800;
     }
 
-    .tagline{
+    .tag{
+      margin-top: 6px;
       color: var(--muted);
-      font-style: italic;
-      font-size: 1rem;
+      font-size: 14px;
     }
 
     nav{
       display:flex;
-      gap: 0.9rem;
       flex-wrap: wrap;
+      gap: 10px;
       align-items: center;
+      justify-content: flex-end;
     }
 
     nav a{
-      color: var(--ink);
       text-decoration: none;
-      font-weight: 650;
-      padding: 0.45rem 0.75rem;
+      color: var(--ink);
+      padding: 8px 10px;
+      border: var(--line) solid var(--pink);
       border-radius: 999px;
-      border: 1px solid rgba(255,43,214,0.22);
-      background: rgba(255,43,214,0.08);
-      box-shadow: 0 0 0 rgba(255,43,214,0);
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      font-weight: 700;
+      font-size: 13px;
     }
 
-    nav a:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,43,214,0.55);
-      box-shadow: 0 0 14px rgba(255,43,214,0.28);
+    /* no animation here */
+    nav a:focus{
+      outline: 2px dashed var(--pink);
+      outline-offset: 3px;
     }
 
     .hero{
-      margin-top: 1.4rem;
-      padding: 1.4rem;
-      border-radius: 18px;
-      border: 1px solid rgba(0,245,255,0.18);
-      background: linear-gradient(180deg, rgba(0,245,255,0.08), rgba(255,43,214,0.05));
-      box-shadow: 0 0 22px rgba(0,245,255,0.10), 0 0 40px rgba(255,43,214,0.10);
+      margin-top: 16px;
+      border: var(--line) solid var(--pink);
+      border-radius: var(--radius);
+      padding: var(--pad);
     }
 
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 1.2rem;
-      align-items: start;
-    }
-    @media (max-width: 860px){
-      .hero-grid{ grid-template-columns: 1fr; }
-    }
+    .hero p{ color: var(--muted); margin-top: 10px; }
 
-    .hero h2{
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      margin-bottom: 0.55rem;
-      color: var(--ink);
-      text-shadow: 0 0 10px rgba(0,245,255,0.22);
-    }
-
-    .hero p{
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .cta{
+    .hero .cta{
+      margin-top: 12px;
       display:flex;
-      gap: 0.8rem;
       flex-wrap: wrap;
-      margin-top: 0.8rem;
+      gap: 10px;
     }
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      gap: 0.5rem;
-      padding: 0.7rem 1rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 750;
-      letter-spacing: 0.2px;
-      border: 1px solid rgba(255,43,214,0.35);
-      background: rgba(255,43,214,0.10);
+      display:inline-block;
+      text-decoration:none;
       color: var(--ink);
-      box-shadow: 0 0 16px rgba(255,43,214,0.18);
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      padding: 10px 12px;
+      border: var(--line) solid var(--pink);
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 13px;
     }
-
-    .btn:hover{
-      transform: translateY(-2px);
-      border-color: rgba(0,245,255,0.45);
-      box-shadow: 0 0 18px rgba(0,245,255,0.20), 0 0 40px rgba(255,43,214,0.16);
-    }
-
-    .btn.secondary{
-      border-color: rgba(0,245,255,0.30);
-      background: rgba(0,245,255,0.08);
-    }
-
-    .mini{
-      border: 1px solid rgba(255,43,214,0.18);
-      background: rgba(5,1,10,0.55);
-      border-radius: 14px;
-      padding: 0.9rem;
-      box-shadow: 0 0 18px rgba(255,43,214,0.10);
-    }
-
-    .mini .k{
-      color: var(--ink);
-      font-weight: 750;
-      margin-bottom: 0.35rem;
-    }
-    .mini .v{ color: var(--muted); }
 
     main{
-      margin-top: 1.6rem;
+      margin-top: 18px;
       display: grid;
-      gap: 1.2rem;
+      gap: 16px;
     }
 
     section{
-      border-radius: 18px;
-      border: 1px solid rgba(255,43,214,0.18);
-      background: rgba(5,1,10,0.55);
-      padding: 1.25rem 1.25rem;
-      box-shadow: 0 0 18px rgba(255,43,214,0.10);
+      border: var(--line) solid var(--pink);
+      border-radius: var(--radius);
+      padding: var(--pad);
     }
 
-    section h3{
-      font-size: 1.2rem;
-      margin-bottom: 0.6rem;
-      color: var(--ink);
-      text-shadow: 0 0 10px rgba(255,43,214,0.22);
+    section h2{
+      font-size: 18px;
+      letter-spacing: 0.3px;
+      margin-bottom: 10px;
     }
 
-    .sub{
-      color: var(--muted);
-      margin-bottom: 0.9rem;
-    }
+    .muted{ color: var(--muted); }
 
-    .cards{
+    .grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 1rem;
+      gap: 14px;
     }
-    @media (max-width: 860px){
-      .cards{ grid-template-columns: 1fr; }
+    @media (max-width: 780px){
+      .grid{ grid-template-columns: 1fr; }
     }
 
+    /* Card with simple neon-pink lines, no glow */
     .card{
-      border-radius: 16px;
-      border: 1px solid rgba(255,43,214,0.22);
-      background: rgba(255,43,214,0.06);
-      padding: 1rem;
-      box-shadow: 0 0 0 rgba(255,43,214,0);
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
       position: relative;
-      overflow: hidden;
+      border-radius: 12px;
+      padding: 14px;
+      color: var(--ink);
+      background: transparent;
+    }
+
+    /* draw lines with pseudo-elements (no glow) */
+    .card::before, .card::after{
+      content:"";
+      position:absolute;
+      inset: 0;
+      border-radius: 12px;
+      pointer-events:none;
     }
 
     .card::before{
-      content:"";
-      position:absolute;
-      inset:-80px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,43,214,0.20), transparent 45%),
-                  radial-gradient(circle at 70% 30%, rgba(0,245,255,0.12), transparent 45%);
-      filter: blur(10px);
-      opacity: 0.8;
+      border: var(--line) solid var(--pink);
     }
 
-    .card > *{ position: relative; z-index: 1; }
-
-    .card:hover{
-      transform: translateY(-4px);
-      border-color: rgba(0,245,255,0.40);
-      box-shadow: 0 0 22px rgba(0,245,255,0.14), 0 0 48px rgba(255,43,214,0.18);
+    /* inner line detail */
+    .card::after{
+      inset: 6px;
+      border: var(--line) solid var(--pink);
+      opacity: 0.45;
     }
 
-    .card h4{
-      font-size: 1.05rem;
-      margin-bottom: 0.45rem;
-      color: var(--ink);
+    /* ONLY animation: blink on hover */
+    .card:hover::before,
+    .card:hover::after{
+      animation: blink 0.55s steps(2, end) infinite;
     }
 
-    .meta{
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 0.7rem;
+    @keyframes blink{
+      0%{ opacity: 1; }
+      50%{ opacity: 0; }
+      100%{ opacity: 1; }
     }
+
+    .card h3{
+      font-size: 15px;
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .card p{ color: var(--muted); font-size: 13px; }
 
     .chips{
+      margin-top: 10px;
       display:flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.65rem;
+      gap: 8px;
     }
 
     .chip{
-      font-size: 0.85rem;
-      padding: 0.22rem 0.55rem;
+      border: var(--line) solid var(--pink);
       border-radius: 999px;
-      border: 1px solid rgba(255,43,214,0.30);
-      background: rgba(255,43,214,0.10);
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 800;
       color: var(--ink);
     }
 
-    .chip.cyan{
-      border-color: rgba(0,245,255,0.30);
-      background: rgba(0,245,255,0.08);
-    }
-
     .links{
-      margin-top: 0.8rem;
+      margin-top: 10px;
       display:flex;
-      gap: 0.8rem;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
     .links a{
       color: var(--ink);
       text-decoration: none;
-      font-weight: 750;
-      border-bottom: 1px dashed rgba(0,245,255,0.45);
+      border-bottom: var(--line) dashed var(--pink);
+      font-weight: 800;
+      font-size: 13px;
     }
-
-    .links a:hover{
-      color: var(--cyan);
-    }
-
-    .diary{
-      border-left: 3px solid rgba(255,43,214,0.65);
-      padding-left: 0.9rem;
-      margin-top: 0.7rem;
-    }
-
-    .diary p{ margin-bottom: 0.8rem; }
 
     footer{
-      margin-top: 1.4rem;
+      margin-top: 18px;
+      border: var(--line) solid var(--pink);
+      border-radius: var(--radius);
+      padding: 14px;
       color: var(--muted);
       text-align: center;
-      padding: 1rem 0 0.2rem;
-      font-size: 0.95rem;
-      opacity: 0.9;
+      font-size: 12px;
     }
+
+    /* anchor jump offset so it doesn't hide under progress bar */
+    section{ scroll-margin-top: 18px; }
   </style>
 </head>
 
-<body class="crt">
-  <div class="grid"></div>
-  <div class="scanlines"></div>
+<body>
+  <!-- Progress bar -->
+  <div class="progress-wrap" aria-hidden="true">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 
   <div class="container">
     <header>
-      <div class="topbar">
-        <div class="logo">
+      <div class="top">
+        <div>
           <h1>Suat Pembeçiçek</h1>
-          <div class="tagline">Computer Science undergraduate • backend systems • data • performance</div>
+          <div class="tag">Computer Science undergraduate • backend • data • systems</div>
         </div>
 
-        <nav>
+        <nav aria-label="Primary">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
-          <a href="maths.html">CS Maths & Tools</a>
           <a href="#diary">Diary</a>
+          <a href="maths.html">Maths & Tools</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
-
-      <div class="hero">
-        <div class="hero-grid">
-          <div>
-            <h2>Building reliable software with a slightly unreasonable love for systems.</h2>
-            <p>
-              I’m a Computer Science student at the University of York. I like backend engineering,
-              data-driven applications, and performance-minded design.
-            </p>
-            <p>
-              This site is my controlled, professional corner of the internet: projects, skills, and short technical notes.
-            </p>
-
-            <div class="cta">
-              <a class="btn" href="#projects">View projects</a>
-              <a class="btn secondary" href="maths.html">Open CS Maths & Tools</a>
-              <a class="btn" href="#contact">Contact</a>
-            </div>
-          </div>
-
-          <div class="mini">
-            <div class="k">Status</div>
-            <div class="v">Portfolio: live on GitHub Pages</div>
-            <div class="v">Focus: backend + data</div>
-            <div class="v">Location: York, UK</div>
-          </div>
-        </div>
-      </div>
     </header>
+
+    <div class="hero">
+      <p>
+        I am a Computer Science undergraduate at the University of York. I focus on building reliable software,
+        backend logic, and data-driven systems.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#projects">View projects</a>
+        <a class="btn" href="maths.html">Open Maths & Tools</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
 
     <main>
       <section id="about">
-        <h3>About</h3>
-        <p class="sub">
-          I am building strong fundamentals: programming, web development, computer architecture, and databases.
-          I enjoy turning concepts into working code and explaining them clearly.
+        <h2>About</h2>
+        <p class="muted">
+          I am building strong fundamentals in programming, web development, computer architecture, and databases.
+          I like clean structure, clear explanations, and small tools that demonstrate real concepts.
         </p>
-        <div class="chips">
-          <span class="chip">Backend</span>
-          <span class="chip cyan">Databases</span>
-          <span class="chip">Web</span>
-          <span class="chip cyan">Performance</span>
-        </div>
       </section>
 
       <section id="projects">
-        <h3>Featured projects</h3>
-        <p class="sub">Quality over quantity: a few clear projects with real explanations.</p>
-
-        <div class="cards">
+        <h2>Featured projects</h2>
+        <div class="grid">
           <div class="card">
-            <h4>CS Maths & Tools (interactive)</h4>
-            <div class="meta">
-              Small tools that demonstrate binary, distance formula, and password combinations.
-            </div>
+            <h3>CS Maths & Tools</h3>
+            <p>Interactive tools demonstrating binary conversion and password-combinations growth.</p>
             <div class="chips">
               <span class="chip">HTML</span>
-              <span class="chip cyan">CSS</span>
+              <span class="chip">CSS</span>
               <span class="chip">JavaScript</span>
             </div>
             <div class="links">
               <a href="maths.html">Live page</a>
-              <a href="https://github.com/ssspicek-ship-it">GitHub profile</a>
+              <a href="https://ssspicek-ship-it.github.io/maths.html">Direct URL</a>
             </div>
           </div>
 
           <div class="card">
-            <h4>Portfolio Website (GitHub Pages)</h4>
-            <div class="meta">
-              A professional single-page portfolio with structured sections and a production diary.
-            </div>
+            <h3>Portfolio Website</h3>
+            <p>A structured GitHub Pages portfolio with projects, skills, and a production diary.</p>
             <div class="chips">
               <span class="chip">GitHub Pages</span>
-              <span class="chip cyan">HTML/CSS</span>
-              <span class="chip">Content writing</span>
+              <span class="chip">Content</span>
             </div>
             <div class="links">
-              <a href="#contact">Contact</a>
-              <a href="#diary">Production diary</a>
+              <a href="#diary">Diary entry</a>
+              <a href="https://github.com/ssspicek-ship-it">Repo/Profile</a>
             </div>
           </div>
         </div>
       </section>
 
       <section id="skills">
-        <h3>Skills</h3>
-        <p class="sub">Skills with evidence (not just a list).</p>
-
-        <div class="cards">
+        <h2>Skills</h2>
+        <div class="grid">
           <div class="card">
-            <h4>Programming</h4>
-            <div class="meta">Python, Java, JavaScript</div>
-            <p class="meta">Evidence: JavaScript tools on <a style="color:var(--cyan);" href="maths.html">Maths & Tools</a>.</p>
+            <h3>Programming</h3>
+            <p>Python, Java, JavaScript (used in the tools and coursework practice).</p>
             <div class="chips">
               <span class="chip">Python</span>
-              <span class="chip cyan">Java</span>
+              <span class="chip">Java</span>
               <span class="chip">JavaScript</span>
             </div>
           </div>
 
           <div class="card">
-            <h4>Web & Databases</h4>
-            <div class="meta">HTML, CSS, SQL fundamentals</div>
-            <p class="meta">Evidence: portfolio structure + plans for database-backed projects.</p>
+            <h3>Web & Databases</h3>
+            <p>HTML, CSS, SQL fundamentals (schema basics and querying).</p>
             <div class="chips">
               <span class="chip">HTML</span>
-              <span class="chip cyan">CSS</span>
+              <span class="chip">CSS</span>
               <span class="chip">SQL</span>
             </div>
           </div>
@@ -492,54 +357,67 @@
       </section>
 
       <section id="diary">
-        <h3>Production diary – Week 15</h3>
-        <p class="sub"><strong>Date:</strong> 13 February 2026</p>
-
-        <div class="diary">
-          <p>
-            This week I developed my GitHub Pages portfolio and improved the structure into clear sections
-            (About, Projects, Skills, Contact). I also started a dedicated CS Maths & Tools page and implemented
-            interactive JavaScript tools.
-          </p>
-
-          <p>
-            The achievement I am most proud of is the Maths & Tools page. It demonstrates real computer science ideas
-            (binary representation and exponential growth) rather than only visual design.
-          </p>
-
-          <p>
-            The most challenging part was organising the HTML structure clearly and debugging small JavaScript issues
-            when user input was invalid. Writing concise, professional text in UK English also required careful wording.
-          </p>
-
-          <p>
-            I learned more about how binary uses powers of two and why that maps well to hardware. I also learned how
-            exponential growth explains password security, because increasing length increases combinations extremely fast.
-          </p>
-
-          <p>
-            Next week I want to add one stronger project with a clear technical write-up and improve the site’s accessibility
-            (better contrast and clearer focus states for keyboard navigation).
-          </p>
-        </div>
+        <h2>Production diary – Week 15</h2>
+        <p class="muted"><strong>Date:</strong> 13 February 2026</p>
+        <p class="muted">
+          This week I developed my GitHub Pages portfolio and improved the structure into clear sections
+          (About, Projects, Skills, Contact). I also started a CS Maths & Tools page and implemented
+          interactive JavaScript tools.
+        </p>
+        <p class="muted">
+          The achievement I am most proud of is the Maths & Tools page because it demonstrates real concepts
+          such as binary representation and exponential growth, not just layout.
+        </p>
+        <p class="muted">
+          The most challenging part was organising HTML structure clearly and debugging JavaScript when user input
+          was invalid. Writing concise professional text in UK English also required careful wording.
+        </p>
+        <p class="muted">
+          I learned how binary maps to powers of two and why it fits hardware, and how exponential growth explains
+          why password length increases security so quickly.
+        </p>
+        <p class="muted">
+          Next week I want to add one more project with a clearer technical write-up and improve accessibility
+          (navigation clarity and keyboard focus).
+        </p>
       </section>
 
       <section id="contact">
-        <h3>Contact</h3>
-        <p class="sub">
-          Email: <a style="color:var(--cyan);" href="mailto:suat.pembecicek@york.ac.uk">suat.pembecicek@york.ac.uk</a>
-          <br/>
-          GitHub: <a style="color:var(--cyan);" href="https://github.com/ssspicek-ship-it">github.com/ssspicek-ship-it</a>
+        <h2>Contact</h2>
+        <p class="muted">
+          Email: <a class="muted" style="text-decoration:none; border-bottom:1px dashed var(--pink); color:var(--ink);"
+            href="mailto:suat.pembecicek@york.ac.uk">suat.pembecicek@york.ac.uk</a>
         </p>
-
-        <p class="sub">
-          Portfolio URL: <span style="color:var(--ink); font-weight:700;">https://ssspicek-ship-it.github.io</span><br/>
-          Maths page: <span style="color:var(--ink); font-weight:700;">https://ssspicek-ship-it.github.io/maths.html</span>
+        <p class="muted">
+          GitHub: <a style="text-decoration:none; border-bottom:1px dashed var(--pink); color:var(--ink);"
+            href="https://github.com/ssspicek-ship-it">github.com/ssspicek-ship-it</a>
+        </p>
+        <p class="muted">
+          Live: <span style="color:var(--ink); font-weight:800;">https://ssspicek-ship-it.github.io</span>
         </p>
       </section>
     </main>
 
-    <footer>© 2026 Suat Pembeçiçek • Synthwave build</footer>
+    <footer>© 2026 Suat Pembeçiçek</footer>
   </div>
+
+  <script>
+    // progress bar only (no extra animations)
+    (function(){
+      const bar = document.getElementById('progressBar');
+
+      function update(){
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const p = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        bar.style.width = p.toFixed(2) + '%';
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
 </body>
 </html>
