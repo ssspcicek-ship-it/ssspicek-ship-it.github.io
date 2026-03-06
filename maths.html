@@ -4,337 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CS Maths & Tools | Suat Pembeçiçek</title>
-  <meta name="description" content="Interactive Computer Science Maths & Tools page by Suat Pembeçiçek." />
   <style>
-    :root {
-      --bg: #0b0b0f;
-      --bg-soft: #12121a;
-      --card: #171722;
-      --text: #f4f4f5;
-      --muted: #b4b4c7;
-      --line: #2a2a3a;
-      --accent: #8b5cf6;
-      --accent-2: #a78bfa;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
-      --radius: 18px;
-      --max: 1000px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(139,92,246,0.18), transparent 30%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--accent-2);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      width: min(var(--max), calc(100% - 2rem));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(11,11,15,0.82);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar .inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.9rem 0;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      font-weight: bold;
-      color: var(--text);
-    }
-
-    .nav {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-    }
-
-    .nav a {
-      color: var(--muted);
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-    }
-
-    .nav a:hover {
-      background: var(--card);
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .hero {
-      padding: 3.5rem 0 2rem;
-    }
-
-    .hero-card,
-    .tool-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 2rem;
-    }
-
-    h1, h2, h3 {
-      margin-top: 0;
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 0.8rem;
-    }
-
-    h2 {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      margin-bottom: 0.8rem;
-    }
-
-    .lead {
-      color: var(--muted);
-      max-width: 65ch;
-    }
-
-    .tools {
-      display: grid;
-      gap: 1rem;
-      padding-bottom: 2rem;
-    }
-
-    .tool-card {
-      padding: 1.4rem;
-    }
-
-    .hint {
-      background: #15152a;
-      border-left: 4px solid var(--accent);
-      padding: 0.8rem 1rem;
-      border-radius: 10px;
-      color: var(--muted);
-      margin: 1rem 0;
-    }
-
-    label {
-      display: block;
-      margin-top: 0.8rem;
-      margin-bottom: 0.25rem;
-      font-weight: bold;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    body { line-height: 1.6; }
+    a { color: #fff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .topbar { position: fixed; top: 0; left: 0; width: 100%; background: #000; border-bottom: 1px solid #fff; z-index: 1000; }
+    .nav { max-width: 1100px; margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .brand { font-size: 18px; font-weight: bold; }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 130px 20px 60px; }
+    h1 { font-size: clamp(36px, 7vw, 72px); margin-bottom: 40px; }
+    h2 { font-size: 30px; margin-bottom: 14px; }
+    p { font-size: 20px; max-width: 900px; margin-bottom: 16px; }
+    .tool { padding: 30px 0; border-top: 1px solid #fff; }
+    .tool:last-child { border-bottom: 1px solid #fff; }
+    label { display: block; font-size: 18px; margin: 12px 0 6px; }
     input, select, button {
       width: 100%;
-      max-width: 360px;
-      padding: 0.8rem 0.9rem;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: var(--bg-soft);
-      color: var(--text);
-      font-size: 1rem;
+      max-width: 350px;
+      padding: 12px;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      font-size: 18px;
     }
-
-    button {
-      background: var(--accent);
-      border: none;
-      cursor: pointer;
-      margin-top: 0.9rem;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: var(--accent-2);
-    }
-
-    .result {
-      margin-top: 1rem;
-      padding: 0.9rem 1rem;
-      border-radius: 12px;
-      background: #141421;
-      border: 1px solid var(--line);
-      font-weight: bold;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .footer {
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      padding: 1.3rem 0 2rem;
-      margin-top: 1rem;
-    }
-
-    p {
-      color: var(--muted);
-    }
-
-    @media (max-width: 800px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
+    button { cursor: pointer; margin-top: 12px; }
+    .result { margin-top: 14px; font-size: 20px; }
   </style>
 </head>
 <body>
   <header class="topbar">
-    <div class="container inner">
-      <a class="brand" href="index.html">← Back to Portfolio</a>
-      <nav class="nav" aria-label="Maths page navigation">
-        <a href="#binary">Binary Tool</a>
-        <a href="#distance">Distance Tool</a>
-        <a href="#password">Password Tool</a>
-      </nav>
-    </div>
+    <nav class="nav">
+      <div class="brand"><a href="index.html">Suat Pembeçiçek</a></div>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html">Skills</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="blog.html">Blog</a>
+        <a href="maths.html">CS Maths & Tools</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <h1>Computer Science Maths & Tools</h1>
-        <p class="lead">
-          On this page I experiment with simple computer science maths using HTML, CSS, and JavaScript.
-          Each tool below takes input, performs a calculation, and explains the idea in clear English.
-        </p>
-      </div>
+  <main class="page">
+    <h1>CS Maths & Tools</h1>
+    <p>
+      This page contains small interactive tools based on simple computer science maths.
+    </p>
+
+    <section class="tool">
+      <h2>Binary and decimal converter</h2>
+      <p>
+        This tool converts a decimal number into binary and hexadecimal.
+      </p>
+
+      <label for="decimal-input">Enter a decimal number:</label>
+      <input type="number" id="decimal-input" min="0" step="1">
+      <button id="convert-btn">Convert</button>
+      <div class="result" id="convert-result"></div>
+
+      <p>
+        In binary, each position represents a power of 2. This is useful in computing because digital hardware naturally works with two states.
+      </p>
     </section>
 
-    <section class="tools">
-      <article class="tool-card" id="binary">
-        <h2>Binary and decimal converter</h2>
-        <p>
-          Computers work with binary, which uses only 0 and 1. Humans normally use decimal, so this tool converts a decimal number into binary and hexadecimal.
-        </p>
+    <section class="tool">
+      <h2>2D distance calculator</h2>
+      <p>
+        This tool calculates the straight-line distance between two points.
+      </p>
 
-        <div class="hint">
-          <strong>Hint:</strong> Try 5, 10, or 42 first and look at how the binary patterns change.
-        </div>
+      <label for="x1">x1:</label>
+      <input type="number" id="x1" step="0.1">
 
-        <label for="decimal-input">Enter a decimal number:</label>
-        <input type="number" id="decimal-input" min="0" step="1" />
-        <button id="convert-btn">Convert</button>
+      <label for="y1">y1:</label>
+      <input type="number" id="y1" step="0.1">
 
-        <div class="result" id="convert-result">Your result will appear here.</div>
+      <label for="x2">x2:</label>
+      <input type="number" id="x2" step="0.1">
 
-        <p>
-          In binary, each position represents a power of 2, such as 1, 2, 4, 8, and 16.
-          For example, the binary number 1010 means 1×8 + 0×4 + 1×2 + 0×1, which equals 10 in decimal.
-          Binary is useful in computers because hardware can represent two clear states, such as on/off or high/low voltage.
-        </p>
-      </article>
+      <label for="y2">y2:</label>
+      <input type="number" id="y2" step="0.1">
 
-      <article class="tool-card" id="distance">
-        <h2>2D distance calculator</h2>
-        <p>
-          This tool calculates the distance between two points in 2D space using the formula
-          <strong>d = √((x2 - x1)² + (y2 - y1)²)</strong>.
-        </p>
+      <button id="distance-btn">Calculate distance</button>
+      <div class="result" id="distance-result"></div>
 
-        <div class="hint">
-          <strong>Hint:</strong> Think of the points as coordinates in a game, a map, or a grid.
-        </div>
+      <p>
+        This formula is used in graphics, games, maps, and pathfinding.
+      </p>
+    </section>
 
-        <div class="grid-2">
-          <div>
-            <label for="x1">x1:</label>
-            <input type="number" id="x1" step="0.1" />
-          </div>
-          <div>
-            <label for="y1">y1:</label>
-            <input type="number" id="y1" step="0.1" />
-          </div>
-          <div>
-            <label for="x2">x2:</label>
-            <input type="number" id="x2" step="0.1" />
-          </div>
-          <div>
-            <label for="y2">y2:</label>
-            <input type="number" id="y2" step="0.1" />
-          </div>
-        </div>
+    <section class="tool">
+      <h2>Password combinations estimator</h2>
+      <p>
+        This tool estimates how many possible passwords exist based on password length and character set size.
+      </p>
 
-        <button id="distance-btn">Calculate distance</button>
-        <div class="result" id="distance-result">Your result will appear here.</div>
+      <label for="pw-length">Password length:</label>
+      <input type="number" id="pw-length" min="1" step="1">
 
-        <p>
-          This formula is important in computer graphics, simulations, robotics, and games.
-          It helps measure how far one object is from another. It can also support pathfinding and movement logic.
-          In simple terms, it tells us the straight-line distance between two coordinates.
-        </p>
-      </article>
+      <label for="charset">Character set:</label>
+      <select id="charset">
+        <option value="26">Letters only (26)</option>
+        <option value="36">Letters + digits (36)</option>
+        <option value="70">Letters + digits + symbols (70)</option>
+      </select>
 
-      <article class="tool-card" id="password">
-        <h2>Password combinations estimator</h2>
-        <p>
-          This tool estimates how many possible passwords exist based on length and character set size.
-          It uses exponents to show why longer passwords are much harder to guess.
-        </p>
+      <button id="pw-btn">Estimate combinations</button>
+      <div class="result" id="pw-result"></div>
 
-        <div class="hint">
-          <strong>Hint:</strong> This is a simplified model. Real password strength also depends on patterns, reuse, and attacker knowledge.
-        </div>
-
-        <label for="pw-length">Password length:</label>
-        <input type="number" id="pw-length" min="1" step="1" />
-
-        <label for="charset">Character set:</label>
-        <select id="charset">
-          <option value="26">Letters only (26 characters)</option>
-          <option value="36">Letters + digits (36 characters)</option>
-          <option value="70">Letters + digits + symbols (about 70 characters)</option>
-        </select>
-
-        <button id="pw-btn">Estimate combinations</button>
-        <div class="result" id="pw-result">Your result will appear here.</div>
-
-        <p>
-          If each position in a password can be filled with <strong>N</strong> possible symbols and the password length is <strong>L</strong>,
-          then the total number of combinations is <strong>N<sup>L</sup></strong>.
-          For example, with 26 letters and length 4, there are 26⁴ = 456,976 possible passwords.
-          This shows why increasing password length quickly makes brute-force guessing much harder.
-        </p>
-      </article>
+      <p>
+        If each character can be chosen in N ways and the password has L characters, the total number of combinations is N to the power of L.
+      </p>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 Suat Pembeçiçek | CS Maths & Tools</p>
-    </div>
-  </footer>
-
   <script>
-    // Binary / Decimal Converter
     const decimalInput = document.getElementById('decimal-input');
     const convertBtn = document.getElementById('convert-btn');
     const convertResult = document.getElementById('convert-result');
@@ -347,14 +136,12 @@
         return;
       }
 
-      const binary = value.toString(2);
-      const hex = value.toString(16).toUpperCase();
-
       convertResult.textContent =
-        'Decimal: ' + value + ' | Binary: ' + binary + ' | Hex: ' + hex;
+        'Decimal: ' + value +
+        ' | Binary: ' + value.toString(2) +
+        ' | Hex: ' + value.toString(16).toUpperCase();
     });
 
-    // Distance Calculator
     const x1Input = document.getElementById('x1');
     const y1Input = document.getElementById('y1');
     const x2Input = document.getElementById('x2');
@@ -377,10 +164,9 @@
       const dy = y2 - y1;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      distanceResult.textContent = 'Distance: ' + distance.toFixed(2) + ' units.';
+      distanceResult.textContent = 'Distance: ' + distance.toFixed(2);
     });
 
-    // Password Combinations Estimator
     const pwLengthInput = document.getElementById('pw-length');
     const charsetSelect = document.getElementById('charset');
     const pwBtn = document.getElementById('pw-btn');
@@ -403,11 +189,7 @@
       }
 
       const combinations = Math.pow(charsetSize, length);
-      const formatted = formatBigNumber(combinations);
-
-      pwResult.textContent =
-        'Possible passwords: about ' + formatted +
-        ' combinations (using ' + charsetSize + ' characters).';
+      pwResult.textContent = 'Possible passwords: about ' + formatBigNumber(combinations);
     });
   </script>
 </body>
