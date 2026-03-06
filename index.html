@@ -2,422 +2,793 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Suat Pembeçiçek – CS Portfolio</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suat Pembeçiçek | Computer Science Portfolio</title>
+  <meta name="description" content="Professional portfolio website of Suat Pembeçiçek, Computer Science student at the University of York." />
   <style>
-    :root{
-      --bg:#000000;            /* true black */
-      --ink:#f5f5f5;
-      --muted:#bdbdbd;
-      --pink:#ff2bbf;          /* neon pink, but NO glow */
-      --pink2:#ff2bbf;
-      --line: 1px;
-      --radius: 14px;
-      --pad: 18px;
-      --max: 980px;
+    :root {
+      --bg: #0b0b0f;
+      --bg-soft: #12121a;
+      --card: #171722;
+      --card-2: #1d1d2b;
+      --text: #f4f4f5;
+      --muted: #b4b4c7;
+      --line: #2a2a3a;
+      --accent: #8b5cf6;
+      --accent-2: #a78bfa;
+      --success: #22c55e;
+      --warn: #f59e0b;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --max: 1100px;
     }
 
-    *{ box-sizing: border-box; margin:0; padding:0; }
-
-    html{ scroll-behavior: auto; } /* NO smooth scroll */
-
-    body{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,0.18), transparent 30%),
+        radial-gradient(circle at top left, rgba(167,139,250,0.1), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
     }
 
-    /* top progress bar */
-    .progress-wrap{
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 8px;
-      border-bottom: var(--line) solid var(--pink);
-      background: var(--bg);
-      z-index: 9999;
-    }
-    .progress-bar{
-      height: 100%;
-      width: 0%;
-      background: var(--pink);
+    a {
+      color: var(--accent-2);
+      text-decoration: none;
     }
 
-    .container{
-      max-width: var(--max);
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+    }
+
+    .skip-link:focus {
+      left: 16px;
+      top: 16px;
+      background: #fff;
+      color: #000;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 2rem));
       margin: 0 auto;
-      padding: 28px 16px 60px;
     }
 
-    /* simple retro line frame */
-    header{
-      border: var(--line) solid var(--pink);
-      border-radius: var(--radius);
-      padding: var(--pad);
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(11,11,15,0.78);
+      border-bottom: 1px solid var(--line);
     }
 
-    .top{
-      display:flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    h1{
-      font-size: 28px;
-      letter-spacing: 0.5px;
-      font-weight: 800;
-    }
-
-    .tag{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    nav{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .nav {
+      display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
     }
 
-    nav a{
-      text-decoration: none;
-      color: var(--ink);
-      padding: 8px 10px;
-      border: var(--line) solid var(--pink);
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 13px;
+    .brand {
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--text);
     }
 
-    /* no animation here */
-    nav a:focus{
-      outline: 2px dashed var(--pink);
-      outline-offset: 3px;
-    }
-
-    .hero{
-      margin-top: 16px;
-      border: var(--line) solid var(--pink);
-      border-radius: var(--radius);
-      padding: var(--pad);
-    }
-
-    .hero p{ color: var(--muted); margin-top: 10px; }
-
-    .hero .cta{
-      margin-top: 12px;
-      display:flex;
+    .nav-links {
+      display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 0.9rem;
     }
 
-    .btn{
-      display:inline-block;
-      text-decoration:none;
-      color: var(--ink);
-      padding: 10px 12px;
-      border: var(--line) solid var(--pink);
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    main{
-      margin-top: 18px;
-      display: grid;
-      gap: 16px;
-    }
-
-    section{
-      border: var(--line) solid var(--pink);
-      border-radius: var(--radius);
-      padding: var(--pad);
-    }
-
-    section h2{
-      font-size: 18px;
-      letter-spacing: 0.3px;
-      margin-bottom: 10px;
-    }
-
-    .muted{ color: var(--muted); }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 14px;
-    }
-    @media (max-width: 780px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    /* Card with simple neon-pink lines, no glow */
-    .card{
-      position: relative;
-      border-radius: 12px;
-      padding: 14px;
-      color: var(--ink);
-      background: transparent;
-    }
-
-    /* draw lines with pseudo-elements (no glow) */
-    .card::before, .card::after{
-      content:"";
-      position:absolute;
-      inset: 0;
-      border-radius: 12px;
-      pointer-events:none;
-    }
-
-    .card::before{
-      border: var(--line) solid var(--pink);
-    }
-
-    /* inner line detail */
-    .card::after{
-      inset: 6px;
-      border: var(--line) solid var(--pink);
-      opacity: 0.45;
-    }
-
-    /* ONLY animation: blink on hover */
-    .card:hover::before,
-    .card:hover::after{
-      animation: blink 0.55s steps(2, end) infinite;
-    }
-
-    @keyframes blink{
-      0%{ opacity: 1; }
-      50%{ opacity: 0; }
-      100%{ opacity: 1; }
-    }
-
-    .card h3{
-      font-size: 15px;
-      margin-bottom: 6px;
-      letter-spacing: 0.2px;
-    }
-
-    .card p{ color: var(--muted); font-size: 13px; }
-
-    .chips{
-      margin-top: 10px;
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip{
-      border: var(--line) solid var(--pink);
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .links{
-      margin-top: 10px;
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .links a{
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: var(--line) dashed var(--pink);
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    footer{
-      margin-top: 18px;
-      border: var(--line) solid var(--pink);
-      border-radius: var(--radius);
-      padding: 14px;
+    .nav-links a {
       color: var(--muted);
-      text-align: center;
-      font-size: 12px;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      transition: 0.2s ease;
     }
 
-    /* anchor jump offset so it doesn't hide under progress bar */
-    section{ scroll-margin-top: 18px; }
-  </style>
-</head>
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+    }
 
-<body>
-  <!-- Progress bar -->
-  <div class="progress-wrap" aria-hidden="true">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
+    .hero {
+      padding: 5rem 0 3rem;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
 
-  <div class="container">
-    <header>
-      <div class="top">
-        <div>
-          <h1>Suat Pembeçiçek</h1>
-          <div class="tag">Computer Science undergraduate • backend • data • systems</div>
-        </div>
+    .hero-card, .panel, .project, .blog-post, .achievement-item, .diary-entry {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
 
-        <nav aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#diary">Diary</a>
-          <a href="maths.html">Maths & Tools</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
+    .hero-card {
+      padding: 2rem;
+    }
 
-    <div class="hero">
-      <p>
-        I am a Computer Science undergraduate at the University of York. I focus on building reliable software,
-        backend logic, and data-driven systems.
-      </p>
-      <div class="cta">
-        <a class="btn" href="#projects">View projects</a>
-        <a class="btn" href="maths.html">Open Maths & Tools</a>
-        <a class="btn" href="#contact">Contact</a>
-      </div>
-    </div>
+    .eyebrow {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: bold;
+    }
 
-    <main>
-      <section id="about">
-        <h2>About</h2>
-        <p class="muted">
-          I am building strong fundamentals in programming, web development, computer architecture, and databases.
-          I like clean structure, clear explanations, and small tools that demonstrate real concepts.
-        </p>
-      </section>
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 0;
+    }
 
-      <section id="projects">
-        <h2>Featured projects</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>CS Maths & Tools</h3>
-            <p>Interactive tools demonstrating binary conversion and password-combinations growth.</p>
-            <div class="chips">
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-              <span class="chip">JavaScript</span>
-            </div>
-            <div class="links">
-              <a href="maths.html">Live page</a>
-              <a href="https://ssspicek-ship-it.github.io/maths.html">Direct URL</a>
-            </div>
-          </div>
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      margin: 0.6rem 0 1rem;
+    }
 
-          <div class="card">
-            <h3>Portfolio Website</h3>
-            <p>A structured GitHub Pages portfolio with projects, skills, and a production diary.</p>
-            <div class="chips">
-              <span class="chip">GitHub Pages</span>
-              <span class="chip">Content</span>
-            </div>
-            <div class="links">
-              <a href="#diary">Diary entry</a>
-              <a href="https://github.com/ssspicek-ship-it">Repo/Profile</a>
-            </div>
-          </div>
-        </div>
-      </section>
+    h2 {
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      margin-bottom: 1rem;
+    }
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>Programming</h3>
-            <p>Python, Java, JavaScript (used in the tools and coursework practice).</p>
-            <div class="chips">
-              <span class="chip">Python</span>
-              <span class="chip">Java</span>
-              <span class="chip">JavaScript</span>
-            </div>
-          </div>
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 60ch;
+    }
 
-          <div class="card">
-            <h3>Web & Databases</h3>
-            <p>HTML, CSS, SQL fundamentals (schema basics and querying).</p>
-            <div class="chips">
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-              <span class="chip">SQL</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.4rem;
+    }
 
-      <section id="diary">
-        <h2>Production diary – Week 15</h2>
-        <p class="muted"><strong>Date:</strong> 13 February 2026</p>
-        <p class="muted">
-          This week I developed my GitHub Pages portfolio and improved the structure into clear sections
-          (About, Projects, Skills, Contact). I also started a CS Maths & Tools page and implemented
-          interactive JavaScript tools.
-        </p>
-        <p class="muted">
-          The achievement I am most proud of is the Maths & Tools page because it demonstrates real concepts
-          such as binary representation and exponential growth, not just layout.
-        </p>
-        <p class="muted">
-          The most challenging part was organising HTML structure clearly and debugging JavaScript when user input
-          was invalid. Writing concise professional text in UK English also required careful wording.
-        </p>
-        <p class="muted">
-          I learned how binary maps to powers of two and why it fits hardware, and how exponential growth explains
-          why password length increases security so quickly.
-        </p>
-        <p class="muted">
-          Next week I want to add one more project with a clearer technical write-up and improve accessibility
-          (navigation clarity and keyboard focus).
-        </p>
-      </section>
+    .button, .button-secondary {
+      display: inline-block;
+      padding: 0.85rem 1.15rem;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p class="muted">
-          Email: <a class="muted" style="text-decoration:none; border-bottom:1px dashed var(--pink); color:var(--ink);"
-            href="mailto:suat.pembecicek@york.ac.uk">suat.pembecicek@york.ac.uk</a>
-        </p>
-        <p class="muted">
-          GitHub: <a style="text-decoration:none; border-bottom:1px dashed var(--pink); color:var(--ink);"
-            href="https://github.com/ssspicek-ship-it">github.com/ssspicek-ship-it</a>
-        </p>
-        <p class="muted">
-          Live: <span style="color:var(--ink); font-weight:800;">https://ssspicek-ship-it.github.io</span>
-        </p>
-      </section>
-    </main>
+    .button {
+      background: var(--accent);
+      color: #fff;
+    }
 
-    <footer>© 2026 Suat Pembeçiçek</footer>
-  </div>
+    .button:hover {
+      background: var(--accent-2);
+      text-decoration: none;
+    }
 
-  <script>
-    // progress bar only (no extra animations)
-    (function(){
-      const bar = document.getElementById('progressBar');
+    .button-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
+    }
 
-      function update(){
-        const doc = document.documentElement;
-        const scrollTop = doc.scrollTop || document.body.scrollTop;
-        const scrollHeight = doc.scrollHeight - doc.clientHeight;
-        const p = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        bar.style.width = p.toFixed(2) + '%';
+    .button-secondary:hover {
+      background: var(--card);
+      text-decoration: none;
+    }
+
+    .hero-side {
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .stat {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    section {
+      padding: 1.2rem 0 0.8rem;
+    }
+
+    .section-head {
+      margin-bottom: 1rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 70ch;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .panel {
+      padding: 1.3rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+    }
+
+    .chip {
+      background: #222236;
+      color: #dddaf7;
+      border: 1px solid #31314a;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+    }
+
+    .project {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .project p, .panel p, .blog-post p, .achievement-item p, .diary-entry p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.25rem;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      background: rgba(139,92,246,0.18);
+      color: #d8ccff;
+      border: 1px solid rgba(167,139,250,0.25);
+    }
+
+    .blog-list,
+    .achievement-list,
+    .diary-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .blog-post,
+    .achievement-item,
+    .diary-entry {
+      padding: 1.2rem;
+    }
+
+    .date {
+      color: #9ca3af;
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .contact-item {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      margin-top: 3rem;
+      padding: 1.4rem 0 2rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    ul.clean {
+      margin: 0.6rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    code.inline {
+      background: #1f1f2c;
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+      border: 1px solid #32324a;
+      color: #dddaf7;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
       }
 
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    })();
-  </script>
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        padding-top: 3.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">Suat Pembeçiçek</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#now">Now</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#blog">Blog</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#diary">Production Diary</a>
+        <a href="maths.html">CS Maths & Tools</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="hero" id="top">
+      <div class="hero-card">
+        <div class="eyebrow">Computer Science Portfolio</div>
+        <h1>Suat Pembeçiçek</h1>
+        <p class="lead">
+          Computer Science undergraduate at the University of York, interested in software development,
+          backend systems, web technologies, and database-driven applications.
+        </p>
+        <p class="lead">
+          I enjoy building clear, reliable, and practical digital tools that solve real problems and show strong technical foundations.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#projects">View projects</a>
+          <a class="button-secondary" href="maths.html">View CS Maths & Tools</a>
+          <a class="button-secondary" href="#contact">Contact me</a>
+        </div>
+      </div>
+
+      <aside class="hero-card hero-side" aria-label="Quick summary">
+        <div class="stat">
+          <strong>Focus</strong>
+          Web development, programming, databases, computer systems
+        </div>
+        <div class="stat">
+          <strong>Currently learning</strong>
+          Java, Python, SQL, GitHub Pages, interface design, first-year CS foundations
+        </div>
+        <div class="stat">
+          <strong>Goal</strong>
+          Build a strong portfolio for internships, placements, and future software roles
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <h2>About me</h2>
+        <p>
+          This section tells visitors who I am, what I study, and what kind of work I want to do.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Who I am</h3>
+          <p>
+            I am a Computer Science student at the University of York. I am developing my understanding of
+            programming, web development, computer architecture, and databases through coursework and personal practice.
+          </p>
+          <p style="margin-top: 0.8rem;">
+            I aim to present my work clearly, improve my technical depth, and build projects that are both practical and easy to use.
+          </p>
+        </article>
+
+        <article class="panel">
+          <h3>What I am looking for</h3>
+          <p>
+            I am interested in internship, placement, and entry-level opportunities where I can strengthen my software
+            development skills and contribute to real technical work.
+          </p>
+          <p style="margin-top: 0.8rem;">
+            My main interests include backend development, web applications, data handling, and systems that are structured, efficient, and reliable.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="now">
+      <div class="section-head">
+        <h2>What I am working on now</h2>
+        <p>
+          This section helps employers quickly understand my current direction instead of making them dig through the whole site like archaeologists.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="panel">
+          <h3>Programming</h3>
+          <p>
+            I am improving my Java and Python skills through first-year assignments and small practical exercises.
+          </p>
+        </article>
+
+        <article class="panel">
+          <h3>Web + GitHub</h3>
+          <p>
+            I am learning how to publish clean, structured websites with HTML, CSS, JavaScript, and GitHub Pages.
+          </p>
+        </article>
+
+        <article class="panel">
+          <h3>Next step</h3>
+          <p>
+            Over the next year, I want to build small web applications that connect a front end to real data and databases.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head">
+        <h2>Featured projects</h2>
+        <p>
+          Stronger than dumping twenty half-baked things into the void. Each project explains the purpose, tools, contribution, and what I learned.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="project">
+          <span class="label">Portfolio Website</span>
+          <h3>Professional Portfolio Website</h3>
+          <p>
+            <strong>Summary:</strong> A personal portfolio website built to present my profile, projects, skills, and development progress in a clear and professional format.
+          </p>
+          <p>
+            <strong>Tech stack:</strong> HTML, CSS, JavaScript, GitHub Pages
+          </p>
+          <p>
+            <strong>My contribution:</strong> Designed the full structure, wrote the content, built the layout, styled the interface, and linked additional pages including a CS Maths & Tools page.
+          </p>
+          <p>
+            <strong>Challenges:</strong> I had to balance professional presentation, accessibility, and a clean layout without making the page cluttered or confusing.
+          </p>
+          <div class="project-links">
+            <a href="#">Source code</a>
+            <a href="#">Live demo</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <span class="label">Java / Coursework</span>
+          <h3>Java Programming Exercises</h3>
+          <p>
+            <strong>Summary:</strong> A set of beginner-to-intermediate Java tasks focused on logic, control flow, input handling, and basic problem solving.
+          </p>
+          <p>
+            <strong>Tech stack:</strong> Java, IntelliJ IDEA / VS Code
+          </p>
+          <p>
+            <strong>My contribution:</strong> Wrote and tested solutions independently, then improved readability and correctness through debugging and revision.
+          </p>
+          <p>
+            <strong>Challenges:</strong> I learned that simple-looking logic problems can break in very stupid ways if the conditions are wrong. The machine is merciless like that.
+          </p>
+          <div class="project-links">
+            <a href="#">Source code</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <span class="label">Maths Tool</span>
+          <h3>CS Maths & Tools Page</h3>
+          <p>
+            <strong>Summary:</strong> A separate page containing interactive mini tools such as a binary converter and password combinations estimator.
+          </p>
+          <p>
+            <strong>Tech stack:</strong> HTML, CSS, JavaScript
+          </p>
+          <p>
+            <strong>My contribution:</strong> Implemented the user interface, input validation, calculations, and plain-English explanations of the underlying maths.
+          </p>
+          <p>
+            <strong>Challenges:</strong> I had to explain technical ideas simply enough for clarity while keeping the maths correct.
+          </p>
+          <div class="project-links">
+            <a href="maths.html">Open page</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <span class="label">Future Project</span>
+          <h3>Database-Driven Web App (Planned)</h3>
+          <p>
+            <strong>Summary:</strong> A planned project where users interact with data stored in a relational database and displayed through a simple web interface.
+          </p>
+          <p>
+            <strong>Tech stack:</strong> HTML, CSS, JavaScript, SQL
+          </p>
+          <p>
+            <strong>My contribution:</strong> Planned schema design, front-end structure, and a clear explanation of how the database supports the application.
+          </p>
+          <p>
+            <strong>Challenges:</strong> The main challenge will be connecting good structure, clear queries, and a usable interface instead of producing a chaos machine.
+          </p>
+          <div class="project-links">
+            <a href="#">Planned repository</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head">
+        <h2>Skills and tools</h2>
+        <p>
+          Skills are more convincing when they connect to actual work instead of floating around like motivational fog.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Technical skills</h3>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">Java</span>
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Git</span>
+            <span class="chip">GitHub</span>
+            <span class="chip">VS Code</span>
+            <span class="chip">IntelliJ IDEA</span>
+          </div>
+          <ul class="clean">
+            <li>Programming: Java and Python through coursework and small problem-solving exercises</li>
+            <li>Web: HTML, CSS, and JavaScript through portfolio development and practical web tasks</li>
+            <li>Data: Introductory SQL and database concepts such as tables, keys, and simple queries</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h3>Professional skills</h3>
+          <ul class="clean">
+            <li>Clear written communication in structured technical English</li>
+            <li>Problem solving through testing, debugging, and step-by-step reasoning</li>
+            <li>Reflective development using production diary notes and iterative improvement</li>
+            <li>Basic interface design awareness using usability heuristics and portfolio refinement</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture-databases">
+      <div class="section-head">
+        <h2>How this links to Computer Architecture and Databases</h2>
+        <p>
+          Because the portfolio is not just “a website”. Under the hood, the silicon goblins are still doing their thing.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Computer Architecture</h3>
+          <p>
+            When a user opens this site, their browser sends HTTP requests and receives files from a remote server.
+            Those servers run on real hardware using CPUs, memory, storage, and networks. Performance depends on how efficiently
+            these systems process requests, move data, and serve content.
+          </p>
+        </article>
+
+        <article class="panel">
+          <h3>Databases</h3>
+          <p>
+            Many future projects in this portfolio will use relational databases to store and organise data.
+            This means I can later demonstrate concepts such as tables, primary keys, normalisation, and SQL queries through real applications.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="blog">
+      <div class="section-head">
+        <h2>Blog and learning notes</h2>
+        <p>
+          Simple explanations of technical ideas. Useful for revision, useful for employers, useful for proving that I did not merely vibe in the direction of understanding.
+        </p>
+      </div>
+
+      <div class="blog-list">
+        <article class="blog-post">
+          <span class="date">6 March 2026</span>
+          <h3>What is an HTTP request?</h3>
+          <p>
+            When I type a website address into my browser and press Enter, my computer sends an HTTP request to a web server.
+            This request asks for a specific resource, such as a page, an image, or a stylesheet. The server then sends back
+            an HTTP response with a status code and the content the browser should display. My browser reads the response and shows the page on screen.
+            This process happens many times on one website because pages often load several files, not just one.
+          </p>
+        </article>
+
+        <article class="blog-post">
+          <span class="date">6 March 2026</span>
+          <h3>Registers vs main memory</h3>
+          <p>
+            CPU registers are very small and very fast storage locations inside the processor. They hold data that the CPU is currently using.
+            Main memory, or RAM, is much larger but slower. Programs rely on both: registers for immediate work and RAM for storing larger amounts of active data.
+            Understanding this helps explain why data movement and memory access matter for performance.
+          </p>
+        </article>
+
+        <article class="blog-post">
+          <span class="date">6 March 2026</span>
+          <h3>Intro to normalisation in databases</h3>
+          <p>
+            Normalisation is a way of organising database tables so that data is stored clearly and with less duplication.
+            Instead of repeating the same information in many places, related data is split into sensible tables.
+            This improves consistency and makes updates easier. It also reduces the risk of errors when the database grows.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="section-head">
+        <h2>Achievements and certificates</h2>
+        <p>
+          Keep this honest. Real evidence beats decorative nonsense every time.
+        </p>
+      </div>
+
+      <div class="achievement-list">
+        <article class="achievement-item">
+          <h3>Online learning and badges</h3>
+          <ul class="clean">
+            <li><strong>GitHub Pages portfolio development</strong> – practical web publishing experience</li>
+            <li><strong>University coursework</strong> – Java, Python, systems, and database-related study</li>
+            <li><strong>Future additions</strong> – AWS, Microsoft Learn, Cisco, IBM SkillsBuild, Credly links can be added here later</li>
+          </ul>
+        </article>
+
+        <article class="achievement-item">
+          <h3>Events and development goals</h3>
+          <ul class="clean">
+            <li>Build stronger coursework portfolio pieces over first year</li>
+            <li>Prepare for internships and technical opportunities</li>
+            <li>Add verified certificates and project write-ups as experience grows</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="diary">
+      <div class="section-head">
+        <h2>Production diary</h2>
+        <p>
+          This section supports reflection and shows how the site improved through planning and usability thinking.
+        </p>
+      </div>
+
+      <div class="diary-list">
+        <article class="diary-entry">
+          <span class="date">6 March 2026</span>
+          <h3>Portfolio structure and usability improvements</h3>
+          <p>
+            In this task I created a professional portfolio website with a clear navigation bar, structured homepage sections,
+            a dedicated maths tools page, and a production diary section. I focused on heuristics such as consistency and standards,
+            aesthetic and minimalist design, and recognition rather than recall.
+          </p>
+          <p style="margin-top: 0.75rem;">
+            Before the redesign, a simple page could easily become too plain, unclear, or missing key sections such as projects,
+            skills, and contact details. I improved this by adding visible navigation links, clearer section headings, stronger
+            call-to-action buttons, and consistent styling across the site.
+          </p>
+          <p style="margin-top: 0.75rem;">
+            These changes improve the user experience because visitors can understand who I am, what I do, and where to click
+            within a few seconds. I also learned that good structure is not decoration; it is part of usability.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>
+          Keep this easy. Nobody wants to solve a side quest just to contact you.
+        </p>
+      </div>
+
+      <div class="contact-list">
+        <div class="contact-item">
+          <strong>Email:</strong>
+          <a href="mailto:your.email@york.ac.uk">your.email@york.ac.uk</a>
+        </div>
+        <div class="contact-item">
+          <strong>Location:</strong>
+          York, United Kingdom
+        </div>
+        <div class="contact-item">
+          <strong>GitHub:</strong>
+          <a href="https://github.com/yourusername">github.com/yourusername</a>
+        </div>
+        <div class="contact-item">
+          <strong>LinkedIn:</strong>
+          <a href="https://www.linkedin.com/in/your-link/">linkedin.com/in/your-link</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © 2026 Suat Pembeçiçek. Built with HTML, CSS, JavaScript, and GitHub Pages.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
