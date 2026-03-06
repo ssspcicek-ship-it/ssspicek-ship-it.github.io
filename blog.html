@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Suat Pembeçiçek</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    body { line-height: 1.6; }
+    a { color: #fff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .topbar { position: fixed; top: 0; left: 0; width: 100%; background: #000; border-bottom: 1px solid #fff; z-index: 1000; }
+    .nav { max-width: 1100px; margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .brand { font-size: 18px; font-weight: bold; }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 130px 20px 60px; }
+    h1 { font-size: clamp(36px, 7vw, 72px); margin-bottom: 40px; }
+    .post { padding: 30px 0; border-top: 1px solid #fff; }
+    .post:last-child { border-bottom: 1px solid #fff; }
+    h2 { font-size: 30px; margin-bottom: 14px; }
+    p { font-size: 20px; max-width: 900px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand"><a href="index.html">Suat Pembeçiçek</a></div>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html">Skills</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="blog.html">Blog</a>
+        <a href="maths.html">CS Maths & Tools</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Blog</h1>
+
+    <article class="post">
+      <h2>What is an HTTP request?</h2>
+      <p>
+        When I type a web address into a browser, my computer sends an HTTP request to a server.
+        This request asks for a resource such as a web page, an image, or a file.
+      </p>
+      <p>
+        The server then sends back an HTTP response with a status code and the requested content.
+        My browser reads the response and displays the result on the screen.
+      </p>
+    </article>
+
+    <article class="post">
+      <h2>Registers and main memory</h2>
+      <p>
+        Registers are very small and very fast storage locations inside the CPU.
+        They hold data that the processor is using immediately.
+      </p>
+      <p>
+        Main memory, or RAM, is much larger but slower.
+        Programs use both because fast access matters, but large storage also matters.
+      </p>
+    </article>
+
+    <article class="post">
+      <h2>Normalisation in databases</h2>
+      <p>
+        Normalisation is the process of organising tables so that data is stored more clearly and with less duplication.
+      </p>
+      <p>
+        This helps improve consistency and makes updates easier.
+        It also reduces the chance of errors when data changes.
+      </p>
+    </article>
+  </main>
+</body>
+</html>
