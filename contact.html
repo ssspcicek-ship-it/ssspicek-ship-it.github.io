@@ -5,18 +5,199 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Suat Pembeçiçek</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; }
-    body { line-height: 1.6; }
-    a { color: #fff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .topbar { position: fixed; top: 0; left: 0; width: 100%; background: #000; border-bottom: 1px solid #fff; z-index: 1000; }
-    .nav { max-width: 1100px; margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .brand { font-size: 18px; font-weight: bold; }
-    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .page { max-width: 1100px; margin: 0 auto; padding: 130px 20px 60px; }
-    h1 { font-size: clamp(36px, 7vw, 72px); margin-bottom: 40px; }
-    p { font-size: 20px; margin-bottom: 18px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #000;
+      border-bottom: 1px solid #fff;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 140px 20px 60px;
+    }
+
+    .intro {
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #fff;
+    }
+
+    .intro h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      margin-bottom: 20px;
+    }
+
+    .intro p {
+      font-size: 20px;
+      max-width: 850px;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid #fff;
+      padding: 28px;
+    }
+
+    .panel h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      margin-bottom: 20px;
+    }
+
+    .info-label {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      opacity: 0.8;
+    }
+
+    .info-value {
+      font-size: 18px;
+      word-break: break-word;
+    }
+
+    .contact-form {
+      margin-top: 10px;
+    }
+
+    .contact-form div {
+      margin-bottom: 20px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 14px;
+      font-size: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      outline: none;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 160px;
+    }
+
+    .contact-form button {
+      background: #fff;
+      color: #000;
+      border: 1px solid #fff;
+      padding: 14px 24px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .contact-form button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    #form-status {
+      margin-top: 16px;
+      font-size: 15px;
+      min-height: 24px;
+    }
+
+    .footer {
+      border-top: 1px solid #fff;
+      padding: 30px 0;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 850px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .page {
+        padding-top: 160px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -36,11 +217,141 @@
   </header>
 
   <main class="page">
-    <h1>Contact</h1>
-    <p>Email: <a href="mailto:your.email@york.ac.uk">your.email@york.ac.uk</a></p>
-    <p>Location: York, United Kingdom</p>
-    <p>GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/your-link/">linkedin.com/in/your-link</a></p>
+    <section class="intro">
+      <h1>Contact</h1>
+      <p>
+        You can use the form below to send me a message directly. You can also find my public professional links here.
+      </p>
+    </section>
+
+    <section class="contact-layout">
+      <section class="panel">
+        <h2>Contact Details</h2>
+
+        <div class="info-item">
+          <span class="info-label">Location</span>
+          <div class="info-value">York, United Kingdom</div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">GitHub</span>
+          <div class="info-value">
+            <a href="https://github.com/ssspcicek-ship-it" target="_blank" rel="noopener noreferrer">
+              github.com/ssspcicek-ship-it
+            </a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">LinkedIn</span>
+          <div class="info-value">
+            <a href="https://www.linkedin.com/in/suat-pembe%C3%A7i%C3%A7ek-2005s06p60s48p" target="_blank" rel="noopener noreferrer">
+              linkedin.com/in/suat-pembeçiçek-2005s06p60s48p
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Send a Message</h2>
+
+        <form id="contact-form" class="contact-form">
+          <div>
+            <label for="name">Your Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="Your name"
+            />
+          </div>
+
+          <div>
+            <label for="email">Your Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <div>
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              placeholder="Write your message here..."
+              rows="6"
+            ></textarea>
+          </div>
+
+          <button type="submit" id="submit-btn">Send Message</button>
+          <p id="form-status"></p>
+        </form>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Suat Pembeçiçek</p>
+    </footer>
   </main>
+
+  <script>
+    const SUPABASE_URL = "https://dddwgktxkukszbrktwvs.supabase.co";
+    const SUPABASE_ANON = "sb_publishable_UP7NU5_QJpXsT0L1Ti7_Xg_7j25qF2b";
+
+    document.getElementById("contact-form")
+      .addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+        const btn = document.getElementById("submit-btn");
+        const status = document.getElementById("form-status");
+
+        btn.disabled = true;
+        btn.textContent = "Sending...";
+        status.textContent = "";
+
+        try {
+          const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/contact_messages`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "apikey": SUPABASE_ANON,
+                "Authorization": `Bearer ${SUPABASE_ANON}`,
+                "Prefer": "return=minimal"
+              },
+              body: JSON.stringify({ name, email, message })
+            }
+          );
+
+          if (response.ok) {
+            status.textContent = "✓ Message sent! I will be in touch soon.";
+            status.style.color = "#1A7A4A";
+            event.target.reset();
+          } else {
+            const err = await response.json();
+            console.error("Supabase error:", err);
+            status.textContent = "Something went wrong. Please try again.";
+            status.style.color = "#DC2626";
+          }
+        } catch (networkError) {
+          console.error("Network error:", networkError);
+          status.textContent = "Could not connect. Check your internet connection.";
+          status.style.color = "#DC2626";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Send Message";
+        }
+      });
+  </script>
 </body>
 </html>
