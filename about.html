@@ -17,6 +17,31 @@
     .page { max-width: 1100px; margin: 0 auto; padding: 130px 20px 60px; }
     h1 { font-size: clamp(36px, 7vw, 72px); margin-bottom: 30px; }
     p { font-size: 20px; max-width: 900px; margin-bottom: 20px; }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      border: 1px solid #fff;
+    }
+
+    @media (max-width: 800px) {
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image img {
+        max-width: 260px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -37,18 +62,27 @@
 
   <main class="page">
     <h1>About</h1>
-    <p>
-      I am a Computer Science undergraduate at the University of York.
-    </p>
-    <p>
-      I am currently developing my understanding of programming, web development, computer architecture, and databases through coursework and independent practice.
-    </p>
-    <p>
-      I am interested in building reliable software, improving technical problem solving, and creating projects that are clear, structured, and useful.
-    </p>
-    <p>
-      I am looking to strengthen my portfolio for future internships, placements, and software development opportunities.
-    </p>
+
+    <div class="about-layout">
+      <div class="about-text">
+        <p>
+          I am a Computer Science undergraduate at the University of York.
+        </p>
+        <p>
+          I am currently developing my understanding of programming, web development, computer architecture, and databases through coursework and independent practice.
+        </p>
+        <p>
+          I am interested in building reliable software, improving technical problem solving, and creating projects that are clear, structured, and useful.
+        </p>
+        <p>
+          I am looking to strengthen my portfolio for future internships, placements, and software development opportunities.
+        </p>
+      </div>
+
+      <div class="about-image">
+        <img src="vesikalık.jpeg" alt="Suat Pembeçiçek portrait">
+      </div>
+    </div>
   </main>
 </body>
 </html>
